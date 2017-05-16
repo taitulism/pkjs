@@ -1,5 +1,5 @@
 {
-  "name": "pkjs",
+  "name": "pk.js",
   "description": "Edit your package.json from the CLI.",
   "version": "0.0.0",
   "private": true,
@@ -9,6 +9,10 @@
   "homepage": "https://github.com/taitulism/pkjs",
   "bugs": "https://github.com/taitulism/pkjs/issues",
   "keywords": [],
+  "preferGlobal": true,
+  "bin": {
+    "pkjs": "bin/pkjs-cli.js"
+  },
   "scripts": {
     "lint": "eslint ./index.js ./src",
     "test": "mocha tests/**/*.spec.js"

@@ -1,4 +1,5 @@
-'use strict';
+#!/usr/bin/env
+
 const read = require('fs').readFile;
 
 const parseJson = require('./try-json').parse;

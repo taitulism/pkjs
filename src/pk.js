@@ -1,25 +1,11 @@
 'use strict';
 
-const fs   = require('fs');
-const join = require('path').join;
-
 const readPkgJsonObj  = require('./read-pkg-json-obj');
 const writePkgJsonObj = require('./write-pkg-json-obj');
 
-const {
-	parse: jsonParse,
-	stringify: jsonStringify
-} = require('./try-json');
-
-const pkgJsonPath = join(process.cwd(), 'package.json');
-
-const args = process.argv.slice(2);
-
-pkjs(...args);
-
 module.exports = pkjs;
 
-function pkjs (prop, a, b) {
+function pkjs (pkgJsonPath, prop, a, b) {
 	let key, value;
 
 	if (!b) {
