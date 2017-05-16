@@ -32,7 +32,11 @@ function pkjs (pkgJsonPath, prop, a, b) {
 					jsonObj[prop] = value;
 				}
 
-				writePkgJsonObj(pkgJsonPath, jsonObj);
+				writePkgJsonObj(pkgJsonPath, jsonObj, (err) => {
+					if (err) {
+						throw err;
+					}
+				});
 			}
 		}
 	});

@@ -22,11 +22,11 @@ function tryJSONStringify (jsonObj) {
 	let str;
 
 	try {
-		str = JSON.stringify(jsonObj);
+		str = JSON.stringify(jsonObj, null, 2);
 	}
 	catch (err) {
-		console.log('pkjs ERROR: your value is json invalid. ', jsonObj);
-		console.log(err);
+		console.error('pkjs ERROR: your value is an invalid JSON.', jsonObj);
+		console.error(err);
 		str = false;
 	}
 
