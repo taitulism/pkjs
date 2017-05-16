@@ -10,4 +10,54 @@
 
 pkjs
 ====
-Edit your package.json from the CLI.
+Edit your `package.json` from the CLI.  
+Get and set values, add to array and handle objects.
+
+Usage:
+------
+### Get the value of the `"name"` field:
+```sh
+$ pkjs name
+# > my-module
+```
+
+# FUTURE SPEC
+
+__Up Next:__
+### Set `"name"` field to equal `"my-new-module"`:
+```sh
+$ pkjs name my-new-module
+```
+Results:
+```js
+// package.json:
+{
+  "name": "my-new-module",
+  ...
+}
+```
+
+
+__More:__
+### Add keywords to the `"keywords"` array. 
+Create an array if not exists.
+```sh
+$ pkjs keywords word-1 "word 2" word-3
+```
+Results:
+```js
+{
+  ...
+  "keywords": [
+	  "word-1",
+	  "word 2",
+	  "word-3"
+  ],
+  ...
+}
+```
+
+```sh
+# add a script (object[prop]) - does not create if not exists
+$ pkjs scripts lint "eslint ./index.js"
+```
