@@ -1,0 +1,1 @@
+const pkjs = require('../src');
