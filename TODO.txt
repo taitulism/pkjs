@@ -1,0 +1,14 @@
+think about how cmd api should look like.
+$ pkjs -s name qwe
+$ pkjs -s scripts lint "eslint ./index.js"
+$ pkjs -g scripts lint
+$ pkjs -g scripts.lint
+
+-s set
+-g get
+-d del
+-e edit
+-add
+name
+version
+desc
