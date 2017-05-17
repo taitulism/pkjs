@@ -5,39 +5,43 @@ const writePkgJsonObj = require('./write-pkg-json-obj');
 
 module.exports = pkjs;
 
-function pkjs (pkgJsonPath, prop, a, b) {
+function pkjs (pkgJsonPath, prop, keyOrValue, ...values) {
 	let key, value;
 
-	if (!b) {
-		value = a;
+	if (typeof keyOrValue === 'undefined') {
+		value = keyOrValue;
 	}
 	else {
-		key = a;
-		value = b;
+		key = keyOrValue;
+		value = values;
 	}
 
 	readPkgJsonObj(pkgJsonPath, (jsonObj) => {
-		if (jsonObj) {
-			if (typeof value === 'undefined') {
-				process.stdout.write(jsonObj[prop]);
+		if (!jsonObj) {
+			return;
+		}
+
+		if (typeof value === 'undefined') {
+			// action: GET
+			process.stdout.write(jsonObj[prop]);
+		}
+		else {
+			// action: SET
+			if (Array.isArray(jsonObj[prop])) {
+				jsonObj[prop].push(value);
+			}
+			else if (typeof jsonObj[prop] === 'object') {
+				jsonObj[prop][key] = value;
 			}
 			else {
-				if (Array.isArray(jsonObj[prop])) {
-					jsonObj[prop].push(value);
-				}
-				else if (typeof jsonObj[prop] === 'object') {
-					jsonObj[prop][key] = value;
-				}
-				else {
-					jsonObj[prop] = value;
-				}
-
-				writePkgJsonObj(pkgJsonPath, jsonObj, (err) => {
-					if (err) {
-						throw err;
-					}
-				});
+				jsonObj[prop] = value;
 			}
+
+			writePkgJsonObj(pkgJsonPath, jsonObj, (err) => {
+				if (err) {
+					throw err;
+				}
+			});
 		}
 	});
 }
