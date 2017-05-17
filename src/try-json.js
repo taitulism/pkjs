@@ -3,32 +3,22 @@
 module.exports.parse = tryJSONParse;
 module.exports.stringify = tryJSONStringify;
 
-function tryJSONParse (jsonStr) {
-	let obj;
-
+function tryJSONParse (jsonStr, callback) {
 	try {
-		obj = JSON.parse(jsonStr);
+		callback(JSON.parse(jsonStr));
 	}
 	catch (err) {
-		console.log('pkjs ERROR: JSON source file is invalid.', jsonStr);
-		console.log(err);
-		obj = false;
+		console.log('pkjs ERROR: JSON source file is invalid and unparsable.', jsonStr);
+		throw err;
 	}
-
-	return obj;
 }
 
-function tryJSONStringify (jsonObj) {
-	let str;
-
+function tryJSONStringify (jsonObj, callback) {
 	try {
-		str = JSON.stringify(jsonObj, null, 2);
+		return JSON.stringify(jsonObj, null, 2);
 	}
 	catch (err) {
-		console.error('pkjs ERROR: your value is an invalid JSON.', jsonObj);
-		console.error(err);
-		str = false;
+		console.error('pkjs ERROR: JSON object is invalid and unstringable.', jsonObj);
+		throw err;
 	}
-
-	return str;
 }

@@ -4,7 +4,7 @@ const read = require('fs').readFile;
 
 const parseJson = require('./try-json').parse;
 
-module.exports = getPkgJsonObj;
+module.exports = getJsonObj;
 
 function handleError (err, pkgJsonPath) {
 	const split = err.message.split(', open \'');
@@ -18,7 +18,7 @@ function handleError (err, pkgJsonPath) {
 	}
 }
 
-function getPkgJsonObj (pkgJsonPath, callback) {
+function getJsonObj (pkgJsonPath, callback) {
 	read(pkgJsonPath, 'utf8', (err, str) => {
 		if (err) {
 			return handleError(err, pkgJsonPath);
